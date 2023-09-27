@@ -2,12 +2,13 @@
  import { useMutation } from '@apollo/client';  
  import {DELETE_CLIENT} from '../mutations/clientMutations';
  import { GET_CLIENTS } from '../queries/client';
+ import { GET_PROJECTS } from '../queries/projectQueries';
 
 export default function ClientRow({client}) {
     const [deleteClient] = useMutation(DELETE_CLIENT, {
         variables: {id: client.id},
         //Refetch queries
-        // refetchQueries: [{query: GET_CLIENTS}],
+        // refetchQueries: [{query: GET_CLIENTS}, {query: GET_PROJECTS}],
         //Update Cache
         update(cache, {data: {deleteClient} } ) {
             const {clients} = cache.readQuery({ query: GET_CLIENTS});
